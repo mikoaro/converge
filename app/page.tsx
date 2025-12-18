@@ -6,8 +6,8 @@ import { ArrowRight, MapPin, Sparkles } from 'lucide-react';
 
 // Initialize Supabase (Server-Side safe)
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-  process.env.SUPABASE_SERVICE_ROLE_KEY|| 'placeholder' // Safe to use in Server Component/Action
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY! // Safe to use in Server Component/Action
 );
 
 export default function LandingPage() {

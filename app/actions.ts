@@ -5,8 +5,8 @@ import { createClient } from '@supabase/supabase-js';
 
 export async function submitVote(sessionId: string, businessId: string, userId: string) {
   const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-    process.env.SUPABASE_SERVICE_ROLE_KEY|| 'placeholder'
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 
   // 1. Check if user already voted for this business
