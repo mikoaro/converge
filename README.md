@@ -8,7 +8,6 @@
 
 
 
-```markdown
 # Converge
 
 **The Digital Concierge for Collaborative Decision Making.**
@@ -209,5 +208,5 @@ MIT
 
 ```
 
-```
+
 
