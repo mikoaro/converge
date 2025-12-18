@@ -85,7 +85,7 @@ graph TD
 
 ## 📍 Yelp AI API Integration
 
-Converge is built entirely around the **Yelp AI API (`/v2/ai/chat`)**. We rely on it as the single source of truth for:
+Converge is built entirely around the **Yelp AI API (`https://api.yelp.com/ai/chat/v2`)**. We rely on it as the single source of truth for:
 
 1. **Reasoning**: We pass user location and natural language queries to Yelp to find the best matching candidates.
 2. **Summarization**: We utilize the `response.text` from Yelp to populate the "Reasoning" section of our AI agent's response.
