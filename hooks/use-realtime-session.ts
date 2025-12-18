@@ -4,8 +4,8 @@ import { createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://placeholder.supabase.co",
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "placeholder"
 );
 
 export interface Message {
@@ -49,22 +49,29 @@ export function useRealtimeSession(sessionId: string) {
       .channel(`chat:${sessionId}`)
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "messages", filter: `session_id=eq.${sessionId}` },
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "messages",
+          filter: `session_id=eq.${sessionId}`,
+        },
         (payload) => {
           const newMsg = payload.new as Message;
           setMessages((prev) => {
             const exists = prev.some((m) => m.id === newMsg.id);
             if (exists) return prev;
-            
-            if (newMsg.role === 'assistant') setIsTyping(false);
-            
+
+            if (newMsg.role === "assistant") setIsTyping(false);
+
             return [...prev, newMsg];
           });
         }
       )
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [sessionId]);
 
   const handleSend = async (text: string) => {

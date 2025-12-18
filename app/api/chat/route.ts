@@ -76,8 +76,8 @@ export async function POST(req: Request) {
 
             if (sessionId && businesses.length > 0) {
               const supabase = createClient(
-                process.env.NEXT_PUBLIC_SUPABASE_URL!,
-                process.env.SUPABASE_SERVICE_ROLE_KEY!
+                process.env.NEXT_PUBLIC_SUPABASE_URL|| 'https://placeholder.supabase.co',
+                process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder'
               );
               await supabase.from("messages").insert({
                 session_id: sessionId,
@@ -98,8 +98,8 @@ export async function POST(req: Request) {
             execute: async () => {
                 console.log(`[Tool] Counting votes for session: ${sessionId}`);
                 const supabase = createClient(
-                    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-                    process.env.SUPABASE_SERVICE_ROLE_KEY!
+                    process.env.NEXT_PUBLIC_SUPABASE_URL|| 'https://placeholder.supabase.co',
+                    process.env.SUPABASE_SERVICE_ROLE_KEY|| 'placeholder'
                 );
                 
                 // Get all votes for this session
@@ -149,8 +149,8 @@ export async function POST(req: Request) {
 
     if (result.text && sessionId && result.toolCalls.length === 0) {
       const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.SUPABASE_SERVICE_ROLE_KEY!
+        process.env.NEXT_PUBLIC_SUPABASE_URL|| 'https://placeholder.supabase.co',
+        process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder'
       );
       await supabase.from("messages").insert({
         session_id: sessionId,
